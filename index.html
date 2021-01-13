@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--[if IE]><link rel="icon" href="/favicon.ico"><![endif]-->    
+    <!-- link to the SqPaymentForm library -->
+    <script type="text/javascript" src="https://js.squareupsandbox.com/v2/paymentform"></script>
+    <!-- link to the local custom styles for SqPaymentForm -->
+    <title>risidio-pay</title>
+  </head>
+  <body class="bg-dark">
+    <noscript>You need javascript.</noscript>
+    <script>
+      const payment = {
+        amountFiat: 5,
+        currency: 'GBP',
+        method: 'bitcoin',
+        paymentCode: 'po-12323423324'
+      }
+      window.risidioPaymentConfig = JSON.stringify({ paymentOption: 'lightning', paymentOptions: [ { allowBitcoin: true }, {allowLightning: true}, {allowStacks: true}, {allowLSAT: false}, {allowEthereum: true} ], orderId: 'XqLKQxEAACQAYvsu', payment: payment})
+    </script>
+    <div id="rpay-entry" msg="aint no sunshine!"></div>
+    <div id="opcode"></div>
+    <div id="trigger"><button onclick="loadApp(this)">load payment</button></div>
+    <!--
+    <script type="text/javascript" src="https://trpay.risidio.com/js/chunk-vendors.js"></script>
+    <script type="text/javascript" src="https://trpay.risidio.com/js/app.js"></script>
+    -->
+    <script type="text/javascript">
+      window.addEventListener("load", function(event) {
+      // here is the Vue code
+        // window.eventBus.$on('paymentEvent', function(data) { 
+          // document.getElementById('opcode').innerHTML = data.opcode;
+        // })
+      });
+      function hideApp( ) {
+        document.getElementById("rpay-container").style.display = "none";
+      }
+      function loadApp( src ) {
+        var s1 = document.createElement( 'script' );
+        s1.setAttribute( 'src', "https://trpay.risidio.com/js/chunk-vendors.js" );
+        document.body.appendChild( s1 );
+        var s2 = document.createElement( 'script' );
+        s2.setAttribute( 'src', "https://trpay.risidio.com/js/app.js" );
+        document.body.appendChild( s2 );
+        setTimeout(function(){
+          window.eventBus.$on('paymentEvent', function(data) { 
+            document.getElementById('opcode').innerHTML = data.opcode;
+          })
+        }, 3000);
+      }
+    </script>
+  </body>
+</html>

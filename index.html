@@ -7,19 +7,73 @@
     <!--[if IE]><link rel="icon" href="/favicon.ico"><![endif]-->    
     <!-- link to the SqPaymentForm library -->
     <script type="text/javascript" src="https://js.squareupsandbox.com/v2/paymentform"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
     <!-- link to the local custom styles for SqPaymentForm -->
     <title>risidio-pay</title>
   </head>
-  <body class="bg-dark">
+  <body class="">
     <noscript>You need javascript.</noscript>
     <script>
+      const lookAndFeel = {
+        theme: 'whiteonblack',
+        labels: {
+          orderMsg: 'Place order for \'STX to Lightning\' select number required and pay.',
+          successMsg: 'Your order has been received with thanks.',
+          title: 'The People\'s',
+          subtitle: 'Republic of Movies',
+          card1Label: 'Select amount to send',
+          card2Label1: 'How many STX tokens do you need?',
+          card2Label2: 'Select operation',
+          card2Label3: 'Make Payment',
+          card2Label4: 'Open Channel',
+          button1Label: 'Back',
+          button2Label: 'Next',
+          quantityLabel: 'Tokens'
+        },
+        sections: {
+          stepper: true
+        },
+        cardStyle: {
+          margin: '0',
+          'border-radius': '20px',
+        },
+        text1Color: {
+          'color': '#000'
+        },
+        text2Color: {
+          'color': '#0277bd'
+        },
+        text3Color: {
+          'color': '#212121'
+        },
+        background: {
+          padding: '0px 0 0 0',
+          height: 'auto',
+          'max-width': '500px',
+          position: 'relative',
+          top: '0px',
+          'background-repeat': 'no-repeat',
+          'background-position': 'center center',
+          '-webkit-background-size': 'cover',
+          '-moz-background-size': 'cover',
+          '-o-background-size': 'cover',
+          'background-size': 'cover',
+          'background-color': '#ccc',
+          // 'background-image': 'url("https://images.prismic.io/risidio-journal/59455bcb-a954-4713-9afd-cfe6130f0b26_Group+994.svg?auto=compress,format")',
+          opacity: 1
+        }
+      }
       const payment = {
         amountFiat: 5,
         currency: 'GBP',
         method: 'bitcoin',
         paymentCode: 'po-12323423324'
       }
-      window.risidioPaymentConfig = JSON.stringify({ paymentOption: 'lightning', paymentOptions: [ { allowBitcoin: true }, {allowLightning: true}, {allowStacks: true}, {allowLSAT: false}, {allowEthereum: true} ], orderId: 'XqLKQxEAACQAYvsu', payment: payment})
+      window.risidioPaymentConfig = JSON.stringify({ paymentOption: 'lightning', paymentOptions: [ { allowBitcoin: true }, {allowLightning: true}, {allowStacks: true}, {allowLSAT: false}, {allowEthereum: true} ], lookAndFeel: lookAndFeel, payment: payment})
     </script>
     <div id="rpay-entry" msg="aint no sunshine!"></div>
     <div id="opcode"></div>
@@ -40,9 +94,11 @@
       }
       function loadApp( src ) {
         var s1 = document.createElement( 'script' );
+        // s1.setAttribute( 'src', "js/chunk-vendors.js" );
         s1.setAttribute( 'src', "https://trpay.risidio.com/js/chunk-vendors.js" );
         document.body.appendChild( s1 );
         var s2 = document.createElement( 'script' );
+        // s2.setAttribute( 'src', "js/app.js" );
         s2.setAttribute( 'src', "https://trpay.risidio.com/js/app.js" );
         document.body.appendChild( s2 );
         setTimeout(function(){

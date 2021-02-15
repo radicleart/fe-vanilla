@@ -14,7 +14,7 @@ printf "\n----------------------------------------------------------------------
 
 function __pushcode() {
   printf "\n- deploying from pipeline build \n";
-  rsync -aP -e "ssh  -p 7019" ./index.html bob@$SERVER:/var/www/vanilla
+  rsync -aP -e "ssh  -p 7019" ./ bob@$SERVER:/var/www/vanilla
 }
 
 __pushcode

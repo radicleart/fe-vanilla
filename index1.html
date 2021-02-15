@@ -8,8 +8,6 @@
     <!-- link to the SqPaymentForm library -->
     <script type="text/javascript" src="https://js.squareupsandbox.com/v2/paymentform"></script>
     <!-- link to the local custom styles for SqPaymentForm -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
     <title>risidio-pay</title>
   </head>
   <body class="bg-dark">
@@ -18,9 +16,10 @@
       const payment = {
         amountFiat: 5,
         currency: 'GBP',
+        method: 'bitcoin',
         paymentCode: 'po-12323423324'
       }
-      window.risidioPaymentConfig = JSON.stringify({ paymentOption: 'fiat', paymentOptions: [ { allowFiat: true }, { allowBitcoin: true }, {allowLightning: true}, {allowStacks: false}, {allowLSAT: false}, {allowEthereum: false} ], payment: payment})
+      window.risidioPaymentConfig = JSON.stringify({ paymentOption: 'lightning', paymentOptions: [ { allowBitcoin: true }, {allowLightning: true}, {allowStacks: true}, {allowLSAT: false}, {allowEthereum: true} ], orderId: 'XqLKQxEAACQAYvsu', payment: payment})
     </script>
     <div id="rpay-entry" msg="aint no sunshine!"></div>
     <div id="opcode"></div>
@@ -41,14 +40,14 @@
       }
       function loadApp( src ) {
         var s1 = document.createElement( 'script' );
-        s1.setAttribute( 'src', "https://trpay.risidio.com/js/chunk-vendors.js" );
+        s1.setAttribute( 'src', "https://rpay.risidio.com/js/chunk-vendors.935acd9c.js" );
         var s2 = document.createElement( 'script' );
-        s2.setAttribute( 'src', "https://trpay.risidio.com/js/app.js" );
-        // var s3 = document.createElement( 'script' );
-        // s3.setAttribute( 'src', "https://rpay.risidio.com/js/chunk-2d2080c7.9b22ff6d.js" );
+        s2.setAttribute( 'src', "https://rpay.risidio.com/js/app.0b4340da.js" );
+        var s3 = document.createElement( 'script' );
+        s3.setAttribute( 'src', "https://rpay.risidio.com/js/chunk-2d2080c7.9b22ff6d.js" );
         document.body.appendChild( s1 );
-        // document.body.appendChild( s3 );
         document.body.appendChild( s2 );
+        document.body.appendChild( s3 );
         setTimeout(function(){
           window.eventBus.$on('paymentEvent', function(data) { 
             document.getElementById('opcode').innerHTML = data.opcode;
